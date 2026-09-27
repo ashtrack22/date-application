@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Special Question for You ✨</title>
+  
+  <!-- Cute Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffd1dc 0%, #ffe6eb 50%, #e8d7ff 100%);
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 40px 30px;
+      border-radius: 28px;
+      box-shadow: 0 15px 35px rgba(220, 100, 140, 0.15);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      border: 3px solid #ffccd5;
+      position: relative;
+    }
+
+    .cute-gif {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(255, 143, 171, 0.3);
+    }
+
+    h1 {
+      color: #d84a75;
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #6c5861;
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      min-height: 60px;
+      position: relative;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #ff6b8b, #ff8e9e);
+      color: white;
+      box-shadow: 0 6px 16px rgba(255, 107, 139, 0.4);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.06);
+    }
+
+    .btn-no {
+      background: #f1f2f6;
+      color: #7f8c8d;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.15s ease-out;
+    }
+
+    /* Date Details Card */
+    #details-view {
+      display: none;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .details-box {
+      background: #fff5f7;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: left;
+      border: 1.5px dashed #ffaab8;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: #55444a;
+      font-size: 15px;
+    }
+
+    .detail-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-item .icon {
+      font-size: 22px;
+    }
+
+    .rsvp-btn {
+      display: inline-block;
+      width: 100%;
+      text-decoration: none;
+      padding: 14px 20px;
+      background: #25d366;
+      color: white;
+      font-weight: 700;
+      border-radius: 50px;
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+      margin-top: 10px;
+      transition: transform 0.2s;
+    }
+
+    .rsvp-btn:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Card Container -->
+  <div class="card">
+    
+    <!-- STEP 1: Question View -->
+    <div id="ask-view">
+      <img 
+        src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW4ycGNocDdwZDRwMGs1eTlyeW01NGtyMmI5cTZoNnM3Z21xMDlyNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/L4lvBzeGQwpvy8eUC4/giphy.gif" 
+        alt="Cute puppy" 
+        class="cute-gif"
+      />
+      
+      <h1>Hey Aditiiii! ❤</h1>
+      <p>I was wondering... would you like to go on a date with me?</p>
+
+      <div class="btn-container">
+        <button id="yesBtn" class="btn btn-yes" onclick="handleYes()">Yes! 🥰</button>
+        <button id="noBtn" class="btn btn-no" onmouseover="moveButton()" onclick="moveButton()">No 🥺</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Date Details View -->
+    <div id="details-view">
+      <img 
+        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGgycjJ6bGJqcjZtcHFobHNqcjlrcW9kZ3pnbnlnbWtsMzY1cnh5MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" 
+        alt="Cute cat celebration" 
+        class="cute-gif"
+      />
+      <h1>YAY! It's a Date! 🎉</h1>
+      <p>Here are the details for our special day:</p>
+
+      <!-- CUSTOMIZE DETAILS HERE -->
+      <div class="details-box">
+        <div class="detail-item">
+          <span class="icon">📍</span>
+          <div>
+            <strong>Where:</strong> Thai Restaurant
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="icon">📅</span>
+          <div>
+            <strong>When:</strong> Thursday 10/1, 7:00 PM
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="icon">👗</span>
+          <div>
+            <strong>Vibe:</strong> Casual & cozy
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMIZE WHATSAPP OR TEXT LINK HERE -->
+      <!-- Replace the phone number (with country code) or change the link to an SMS link -->
+      <a 
+        class="rsvp-btn" 
+        href="https://wa.me/15551234567?text=Hey!%20I%20said%20YES%20to%20our%20date!%20%E2%9C%A8%F0%9F%A5%B0" 
+        target="_blank"
+      >
+        Send confirmation to me 💬
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    let yesScale = 1;
+
+    // Runaway "No" button logic
+    function moveButton() {
+      // Screen boundary check
+      const card = document.querySelector('.card');
+      const cardRect = card.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = cardRect.width - btnRect.width - 40;
+      const maxY = cardRect.height - btnRect.height - 40;
+
+      const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
+      const randomY = Math.floor(Math.random() * maxY) - (maxY / 2);
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      // Make the "Yes" button slightly bigger every time they try to click "No"
+      yesScale += 0.12;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    // "Yes" clicked logic
+    function handleYes() {
+      // Fire confetti
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Show details
+      document.getElementById('ask-view').style.display = 'none';
+      document.getElementById('details-view').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
