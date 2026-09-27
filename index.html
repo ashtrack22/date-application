@@ -53,6 +53,17 @@
       box-shadow: 0 8px 20px rgba(255, 143, 171, 0.3);
     }
 
+    /* New style for the location image on the second screen */
+    .location-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border: 3px solid white;
+    }
+
     h1 {
       color: #d84a75;
       font-size: 26px;
@@ -163,12 +174,13 @@
   <!-- Card Container -->
   <div class="card">
     
+    <!-- STEP 1: Question View -->
     <div id="ask-view">
-  <img 
-    src="https://i.pinimg.com/originals/68/38/a1/6838a106c6a7f8afdcf6202b3d999472.gif" 
-    alt="Cute pleading emoji" 
-    class="cute-gif"
-    />
+      <img 
+        src="https://i.pinimg.com/originals/68/38/a1/6838a106c6a7f8afdcf6202b3d999472.gif" 
+        alt="Cute pleading emoji" 
+        class="cute-gif"
+      />
       <h1>Hi Aditi! ❤️</h1>
       <p>I was wondering... if would you like to go out on a date with me?</p>
 
@@ -181,9 +193,9 @@
     <!-- STEP 2: Date Details View -->
     <div id="details-view">
       <img 
-        src="https://i.pinimg.com/originals/24/e9/87/24e987c08a94639e4e37fc280a969f64.gif" 
-        alt="Happy celebration" 
-        class="cute-gif"
+        src="https://images.unsplash.com/photo-1542153202-9907f59dff86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+        alt="Piedmont Park" 
+        class="location-img"
       />
       <h1>YAY! It's a Date! 🎉</h1>
       <p>Here are the details for our special day:</p>
@@ -193,7 +205,7 @@
         <div class="detail-item">
           <span class="icon">📍</span>
           <div>
-            <strong>Where:</strong> Pidemont Park
+            <strong>Where:</strong> Piedmont Park
           </div>
         </div>
         <div class="detail-item">
@@ -211,7 +223,6 @@
       </div>
 
       <!-- CUSTOMIZE WHATSAPP OR TEXT LINK HERE -->
-      <!-- Replace the phone number (with country code) or change the link to an SMS link -->
       <a 
         class="rsvp-btn" 
         href="https://wa.me/15551234567?text=Hey!%20I%20said%20YES%20to%20our%20date!%20%E2%9C%A8%F0%9F%A5%B0" 
